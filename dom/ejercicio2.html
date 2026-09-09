@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+    <style>
+        table{
+            border: 1px solid black;
+            
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Control de asistencias NIVEL 1: INICIAL </h1>
+    <form action="">
+        Alumno <input type="text" id="nombre" placeholder="ingrese su nombre">
+        Estado<select name="" id="estado">
+            <option value="">Ingrese su estado</option>
+            <option value="Presente">Presente</option>
+            <option value="Ausente">Ausente</option>
+        </select>
+        <input type="button" onclick="enviar()" value="Cargar">
+    </form>
+
+    
+    <h1>Listado de alumnos</h1>
+
+    <table style="background-color: maroon;">
+        <tr>
+            <th>Nombre</th>
+            <th>Estado</th>
+        </tr>
+        <tbody id="tabla">
+
+        </tbody>
+    </table>
+    <br>
+    <h2>Datos</h2>
+    Alumnos<p id="alumnos"></p>
+    Total presentes<p id="total_presentes"></p>
+    Total ausentes<p id="total_ausentes"></p>
+    Total alumnos<p id="total"></p>
+    Porcentaje<p id="porcentaje"></p>
+</body>
+</html>
+
+<script>
+        let estudiante = [];
+        let estado = []
+
+        function enviar(){
+            let nombre = document.getElementById("nombre").value;
+            estudiante.push(nombre);
+            let asistencia = document.getElementById("estado").value;
+            estado.push(asistencia);
+            let presentes = 0
+            let ausentes = 0
+            let filastablas = "";
+
+            for(let i = 0; i < estado.length; i++){
+                if(estado[i] == "Presente"){
+                    presentes++
+                }else{
+                    ausentes++
+                }
+
+                filastablas += "<tr>" +
+                          "<td>" + estudiante[i] + "</td>" +
+                          "<td>" + estado[i] + "</td>" +
+                        "</tr>";
+                
+            }
+
+            let total_alumnos =presentes+ausentes 
+            let porcentaje = (presentes/total_alumnos)*100;
+            document.getElementById("alumnos").innerText = estudiante.join(" , ");
+            document.getElementById("total_presentes").innerText = presentes;
+            document.getElementById("total_ausentes").innerText = ausentes;
+            document.getElementById("total").innerText = presentes+ausentes;
+            document.getElementById("porcentaje").innerText = porcentaje + "%";
+            document.getElementById("tabla").innerHTML = filastablas;
+            // Limpiamos el input
+            document.getElementById("nombre").value = "";
+        }
+    </script>

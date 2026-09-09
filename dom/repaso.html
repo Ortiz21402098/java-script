@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso Java script</title>
+</head>
+<body>
+    <h1>Introduccion</h1>
+    <form action="">
+        Alumno <input type="text" id="alumno"><br>
+        Materia <input type="text" id="materia"><br>
+        Nota <input type="text" id="nota"><br>
+        <input type="button" onclick="agregar()" value="Agregar">
+        <input type="button" onclick="mostrar()" value="Ver vector de objeto">
+    </form>
+
+    <h2>Alumnos</h2>
+    <div id="mensaje1">
+
+    </div>
+    <div id="mensaje">
+
+    </div>
+
+    <div id="vector_objeto"></div>
+
+    
+</body>
+</html>
+
+<script>
+    let alumnos =[];
+    let materias = [];
+    let notas =[];
+
+    
+    function agregar(){
+        let estudiante = document.getElementById("alumno").value
+        let asignatura = document.getElementById("materia").value
+        let Notas = document.getElementById("nota").value
+
+        alumnos.push(estudiante)
+        materias.push(asignatura)
+        notas.push(Notas)
+
+        document.getElementById("mensaje1").innerHTML =
+            "<h2>"+alumnos+"</h2>"+
+            "<h2>"+materias+"</h2>"+
+            "<h2>"+ notas +"</h2>";
+        
+            let contenido = "";
+
+        for(i=0;i<alumnos.length;i++){
+            contenido += "<p>Alumno: " + alumnos[i] + " | Materia: " + materias[i] + " | Nota: " + notas[i] + "</p>";
+        }
+
+        document.getElementById("mensaje").innerHTML = contenido;
+
+    }
+</script>
+
+<script>
+
+//opcion2 vector de objetos
+let escuela = [{
+        estudiantes:"",
+        asignaturas:"",
+        nota:""
+    }]
+function mostrar(){
+    let estudiante = document.getElementById("alumno").value
+    let asignatura = document.getElementById("materia").value
+    let Notas = document.getElementById("nota").value
+
+    escuela.push({
+            estudiantes:estudiante,
+            asignaturas:asignatura,
+            nota:Notas
+        })
+
+
+        let contenido = "";
+
+        for(i=0;i<escuela.length;i++){
+            contenido += "<p>Alumno: " + escuela[i].estudiantes + " | Materia: " + escuela[i].asignaturas + " | Nota: " + escuela[i].nota + "</p>";
+        }
+
+        document.getElementById("vector_objeto").innerHTML = contenido;
+}
+
+</script>

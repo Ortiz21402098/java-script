@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <label for="Tarea" >Tarea: </label>
+        <input type="text" id="Tareas" step="5">
+        <br>
+        <br>
+        <label for="Tiempo" >Tiempo: </label>
+        <input type="number" name="" id="Tiem">
+        <br>
+        <br>
+        <input type="button" onclick="agregarTareas()"value="Agregar">
+    </form>
+
+    <hr>
+
+    Tarea: <p id="Mensaje"></p>
+    Tiempo total: <p id="TiempoTotal"></p>
+    Tiempo Maximo: <p id="TiempoMax"></p>
+
+</body>
+<script>
+    let nombres = []
+    let tiempos =  []
+
+    function agregarTareas(){
+        let nombre = document.getElementById("Tareas").value
+        let Tiempo = parseFloat(document.getElementById("Tiem").value)
+        nombres.push(nombre)
+        tiempos.push(Tiempo)
+
+        let sumaTotal = 0
+        let Mayortiempo = 0
+        let TareaMaxima = ""
+
+        for(let i = 0; i < tiempos.length;i++){
+            sumaTotal += tiempos[i] 
+
+            if(tiempos[i] > Mayortiempo){
+                Mayortiempo = tiempos[i];
+                
+            }
+        }
+            
+
+
+        document.getElementById("Mensaje").innerHTML = nombres.join(",")
+        document.getElementById("TiempoTotal").innerHTML = sumaTotal
+        document.getElementById("TiempoMax").innerHTML = Mayortiempo
+
+
+    }
+</script>
+
+</html>

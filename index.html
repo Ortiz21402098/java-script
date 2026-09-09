@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Introducción a JavaScript</title>
+
+    <style>
+        /* -------------------------
+   ESTILOS GENERALES
+------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* -------------------------
+   HEADER
+------------------------- */
+
+header {
+    background: #1e293b;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 18px;
+    color: #cbd5e1;
+}
+
+
+/* -------------------------
+   CONTENIDO PRINCIPAL
+------------------------- */
+
+main {
+    flex: 1;
+    padding: 50px 20px;
+}
+
+.contenedor {
+    max-width: 1000px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+
+/* -------------------------
+   TARJETAS
+------------------------- */
+
+.tarjeta {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.tarjeta:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.tarjeta h2 {
+    margin-bottom: 15px;
+    color: #0f172a;
+}
+
+.tarjeta p {
+    margin-bottom: 20px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+
+/* -------------------------
+   BOTONES / ENLACES
+------------------------- */
+
+.tarjeta a {
+    display: block;
+
+    background: #2563eb;
+    color: white;
+
+    text-decoration: none;
+
+    padding: 12px 15px;
+    margin-top: 10px;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    transition: background 0.3s ease,
+                transform 0.2s ease;
+}
+
+.tarjeta a:hover {
+    background: #1d4ed8;
+    transform: translateX(5px);
+}
+
+
+/* -------------------------
+   FOOTER
+------------------------- */
+
+footer {
+    background: #0f172a;
+    color: #cbd5e1;
+
+    text-align: center;
+
+    padding: 20px;
+}
+
+footer p {
+    font-size: 14px;
+}
+
+
+/* -------------------------
+   RESPONSIVE
+------------------------- */
+
+@media (max-width: 700px) {
+
+    .contenedor {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    header p {
+        font-size: 16px;
+    }
+
+    main {
+        padding: 30px 15px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Introducción a JavaScript</h1>
+        <p>Ejercicios de DOM y API</p>
+    </header>
+
+    <main>
+
+        <section class="contenedor">
+
+            <div class="tarjeta">
+                <h2>💻 Ejercicios DOM</h2>
+
+                <p>Prácticas de manipulación del DOM con JavaScript.</p>
+
+                <a href="./dom/ejercicio1.html">Ejercicio DOM 1</a>
+                <a href="./dom/ejercicio2.html">Ejercicio DOM 2</a>
+                <a href="./dom/ejercicio3.html">Ejercicio DOM 3</a>
+                <a href="./dom/ejercicio4.html">Ejercicio DOM 4</a>
+                <a href="./dom/repaso.html">Repaso</a>
+            </div>
+
+
+            <div class="tarjeta">
+                <h2>🌐 Ejercicios API</h2>
+
+                <p>Prácticas utilizando APIs y archivos JSON.</p>
+
+                <a href="./api/apidolar.html">API Dólar</a>
+                <a href="./api/ejerciciopeliculas.html">API Películas</a>
+                
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Proyecto JavaScript - DOM & API</p>
+    </footer>
+
+</body>
+
+</html>

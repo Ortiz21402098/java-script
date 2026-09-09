@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peliculas</title>
+
+</head>
+<body>
+    <h1>🎬 Cartelera de Cine</h1>
+    <p>Peliculas disponibles en cartelera</p>
+    <input type="button" value="Cargar peliculas" onclick="cargarPeliculas()">
+    
+    
+    <div id="peliculas"></div>
+
+    <div id="mensaje"></div>
+</body>
+
+<script>
+    async function cargarPeliculas() {
+       try{
+
+        let datos = await fetch("peli.json");
+        let pelicula = await datos.json();
+        let contenedor = document.getElementById("peliculas");
+        
+        
+        for(let i=0; i< pelicula.length; i++){
+
+            contenedor.innerHTML += 
+                        '<div>' +
+                           '<img src="' + pelicula[i].imagen + '">' +
+                            '<h2>' + pelicula[i].titulo + '</h2>' +
+                            '<p>Género: ' + pelicula[i].genero + '</p>' +
+                            '<p>Año: ' + pelicula[i].año + '</p>' +
+                            '<p>' + pelicula[i].descripcion + '</p>' +
+                        '</div>';
+        }
+       }catch(error){
+        const mensaje = document.getElementById("mensaje");
+
+        mensaje.innerHTML = "Error al cargar las películas.";
+
+       }
+        
+    }
+</script>
+</html>

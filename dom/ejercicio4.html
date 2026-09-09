@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivel 4</title>
+</head>
+<body>
+    <h1>gastos de la empresas</h1>
+    <form action="">
+        Empleado <input type="" id="Em">
+        Horas trabajadas <input type="number" id="Hs">
+        Tarifa <input type="number" id="Ta">
+        <input type="button" onclick="calcular()" value="Calcular">
+    </form>
+    <h2>Factura de la empresa</h2>
+    nombre del empleado: <p id="nombre"></p>
+    horas trabajadas: <p id="Horas"></p>
+    Tarifa: <p id="tarifa_p"></p>
+    <h2>Gastos Totales de la empresa:$ <span id="Total">0</span></h2>
+
+    <script>
+        let Emple = []
+        let Horas_normales = []
+        let Tari = []
+        let sueldo_empleado = []
+
+        function calcular(){
+            let Em = document.getElementById("Em").value;
+            let Hs = parseInt(document.getElementById("Hs").value);
+            let Ta = parseInt(document.getElementById("Ta").value);
+            Emple.push(Em)
+            Tari.push(Ta)
+            Horas_normales.push(Hs)
+
+            let sueldo_total = 0
+
+            let gasto_total = 0
+            
+            for(let i = 0; i < Emple.length; i++){
+                if (Horas_normales[i] > 40){
+                let horas_extras = Horas_normales[i] - 40;
+                let sueldo_normal = Horas_normales[i] * Tari[i];
+                let sueldo_extra = Horas_normales[i] * Tari[i] * 1.5;
+                sueldo_total = sueldo_normal + sueldo_extra
+            }else{
+                sueldo_total = Horas_normales[i] * Tari[i]
+            }
+            sueldo_empleado.push(sueldo_total)
+
+            gasto_total = gasto_total + sueldo_total
+
+
+            document.getElementById("nombre").innerHTML = Emple
+            document.getElementById("tarifa_p").innerHTML = Tari
+            document.getElementById("Horas").innerHTML = Horas_normales
+            document.getElementById("Total").innerHTML = gasto_total
+            
+        }
+
+        }
+    </script>
+</body>
+</html>

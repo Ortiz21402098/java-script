@@ -1,0 +1,7 @@
+[
+{"nombre": "Lucas", "apellido": "Gómez", "materia": "Programación", "nota": 9},
+{"nombre": "Sofía", "apellido": "Martínez", "materia": "Bases de Datos", "nota": 4},
+{"nombre": "Mateo", "apellido": "Fernández", "materia": "Programación", "nota": 7},
+{"nombre": "Valentina", "apellido": "Pérez", "materia": "Diseño Web", "nota": 2},
+{"nombre": "Joaquín", "apellido": "López", "materia": "Bases de Datos", "nota": 10}
+]
