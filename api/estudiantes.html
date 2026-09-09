@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listdo de Estudiantes</title>
+
+    <style>
+        .green { color: green; font-weight: bold; }
+        .red { color: red; font-weight: bold; }
+        table { border-collapse: collapse; margin-top: 15px; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    </style>
+</head>
+
+<body>
+    <h1>Listdo de Estudiantes</h1>
+    <input type="text" id="buscador" placeholder="Buscar por nombre, apellido o materia...">
+    <input type="button" onclick="buscar()" value="Buscar">
+    <input type="button" onclick="limpiar()" value="Limpiar">
+    
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Materia</th>
+            <th>Nota</th>
+            <th>Estado</th>
+        </tr>
+        <tbody id="tabla">
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>
+
+
+<script>
+let alumnos=[]
+async function mostrar(){
+    try{
+        let datos = await fetch("estudiantes.json")
+        alumnos = await datos.json()
+
+        let filastablas = "";
+
+        for(let i = 0; i < alumnos.length; i++){
+
+            let clase = "";
+            let estado = "";
+
+            if (alumnos[i].nota >= 7){
+                clase = "green";
+                estado = "aprobado";
+            } else {
+                clase = "red";
+                estado = "desaprobado";
+            }
+
+            filastablas += "<tr>" +
+                "<td>" + alumnos[i].nombre + "</td>" +
+                "<td>" + alumnos[i].apellido + "</td>" +
+                "<td>" + alumnos[i].materia + "</td>" +
+                "<td class='" + clase + "'>" + alumnos[i].nota + "</td>" +
+                "<td class='" + clase + "'>" + estado + "</td>" +
+                "</tr>";
+        }
+
+        document.getElementById("tabla").innerHTML = filastablas;
+    }
+    catch(error){
+        alert(error);
+    }
+}
+
+
+function buscar(){
+
+    let texto = document.getElementById("buscador").value.toLowerCase();
+
+    let tabla = "";
+
+    for(let i = 0; i < alumnos.length; i++){
+
+        if(
+            alumnos[i].nombre.toLowerCase().includes(texto) ||
+            alumnos[i].apellido.toLowerCase().includes(texto) ||
+            alumnos[i].materia.toLowerCase().includes(texto)
+        ){
+
+            let clase = "";
+            let estado = "";
+
+            if(alumnos[i].nota >= 7){
+                clase = "green";
+                estado = "aprobado";
+            } else {
+                clase = "red";
+                estado = "desaprobado";
+            }
+
+            tabla += "<tr>" +
+                "<td>" + alumnos[i].nombre + "</td>" +
+                "<td>" + alumnos[i].apellido + "</td>" +
+                "<td>" + alumnos[i].materia + "</td>" +
+                "<td class='" + clase + "'>" + alumnos[i].nota + "</td>" +
+                "<td class='" + clase + "'>" + estado + "</td>" +
+                "</tr>";
+        }
+    }
+
+    document.getElementById("tabla").innerHTML = tabla;
+}
+
+function limpiar(){
+
+    document.getElementById("buscador").value = "";
+
+    mostrar();
+}
+
+
+
+
+mostrar();
+
+</script>
+

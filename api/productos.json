@@ -1,0 +1,7 @@
+[
+{"id": 1, "nombre": "Teclado Mecánico RGB", "categoria": "Periféricos", "precio": 45000, "stock": 8},
+{"id": 2, "nombre": "Mouse Inalámbrico", "categoria": "Periféricos", "precio": 18000, "stock": 15},
+{"id": 3, "nombre": "Monitor 24 pulgadas", "categoria": "Pantallas", "precio": 190000, "stock": 3},
+{"id": 4, "nombre": "Auriculares Gamer", "categoria": "Audio", "precio": 32000, "stock": 0},
+{"id": 5, "nombre": "Webcam HD 1080p", "categoria": "Video", "precio": 28000, "stock": 5}
+]

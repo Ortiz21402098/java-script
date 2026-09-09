@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Repaso API</h2>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Nota</th>
+        </tr>
+        <tbody id="tabla">
+
+        </tbody>
+    </table>
+</body>
+</html>
+
+<script>
+    let estudiantes = [{nombre:"Esteban", Apellido:"Gomez", Nota:"5"},
+                        {nombre:"Mark", Apellido:"Borja", Nota:"8"},
+                    {nombre:"Nicole", Apellido:"Lacsamana", Nota:"9"}]  
+    let filastablas = ""          
+    for(let i = 0; i < estudiantes.length; i++){
+        filastablas += "<tr>" +
+    "<td>"+ estudiantes[i].nombre + "</td>"+
+    "<td>"+ estudiantes[i].Apellido + "</td>"+
+    "<td>"+ estudiantes[i].Nota + "</td>" + "</tr>";
+    
+}
+
+document.getElementById("tabla").innerHTML = filastablas
+    
+</script>
