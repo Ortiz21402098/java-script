@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - Catálogo con Carrito</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        h2 {
+            color: #1a252f;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .buscador-container {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        #buscador {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 250px;
+        }
+
+        /* Layout Principal: Catálogo + Carrito */
+        .contenido-principal {
+            display: flex;
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            align-items: flex-start;
+        }
+
+        #mostrar_productos {
+            flex: 2;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Tarjeta de Producto */
+        .card-producto {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .card-producto img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-producto h3 {
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-producto .precio {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 0.4rem 0;
+        }
+
+        /* Sección del Carrito lateral */
+        .seccion-carrito {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 1rem;
+        }
+
+        .seccion-carrito h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            border-bottom: 2px solid #f4f6f8;
+            padding-bottom: 0.5rem;
+        }
+
+        .item-carrito {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .item-carrito div p {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .item-carrito div span {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .btn-eliminar {
+            background-color: #e74c3c !important;
+            padding: 0.2rem 0.5rem !important;
+            font-size: 0.8rem !important;
+        }
+
+        .total-carrito {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 1rem 0;
+            text-align: right;
+        }
+
+        /* Formulario dentro del Carrito */
+        .form-pedido {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .form-pedido input {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Botones */
+        input[type="button"], button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover, button:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-whatsapp {
+            background-color: #25d366 !important;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1eb857 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Catálogo y Buscador de Productos</h2>
+
+    <div class="buscador-container">
+        <input type="text" id="buscador" placeholder="Buscar producto...">
+        <input type="button" onclick="buscar()" value="Buscar">
+        <input type="button" onclick="limpiar()" value="Limpiar">
+    </div>
+
+    <div class="contenido-principal">
+        <!-- Productos -->
+        <div id="mostrar_productos"></div>
+
+        <!-- Carrito de Compras -->
+        <div class="seccion-carrito">
+            <h3>🛒 Carrito de Compras</h3>
+            <div id="lista_carrito">
+                <p><small>El carrito está vacío.</small></p>
+            </div>
+            
+            <div class="total-carrito" id="total_precio">Total: $0</div>
+
+            <div class="form-pedido">
+                <h4>Datos para el envío:</h4>
+                <input type="text" id="clienteNombre" placeholder="Tu Nombre">
+                <input type="text" id="clienteDireccion" placeholder="Tu Dirección">
+                <button class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar pedido por WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+    <input type="button" onclick="peliculas()" value="Ir a películas">
+
+    <script>
+        let productos = [];
+        let carrito = [];
+        const telefonoWhatsApp = "5493564581110";
+
+        async function mostrar() {
+            try {
+                let datos = await fetch("productos.json");
+                productos = await datos.json();
+                let html = "";
+
+                for (let i = 0; i < productos.length; i++) {
+                    html += `
+                        <div class="card-producto">
+                            <img src="${productos[i].imagen}" alt="${productos[i].nombre}">
+                            <h3>${productos[i].nombre}</h3>
+                            <p><strong>Cat:</strong> ${productos[i].categoria}</p>
+                            <p class="precio">$${productos[i].precio}</p>
+                            <p><small>Stock: ${productos[i].stock}</small></p><br>
+                            <input type="button" onclick="agregarAlCarrito(${i})" value="Agregar al carrito">
+                        </div>
+                    `;
+                }
+                
+                document.getElementById("mostrar_productos").innerHTML = html;
+
+            } catch (error) {
+                alert("Error de conexión: " + error);
+            }
+        }
+
+        function buscar() {
+            let buscar = document.getElementById("buscador").value.toLowerCase();
+            let html = "";
+
+            for (let i = 0; i < productos.length; i++) {
+                if (
+                    productos[i].nombre.toLowerCase().includes(buscar) ||
+                    productos[i].categoria.toLowerCase().includes(buscar) ||
+                    productos[i].precio.toString().includes(buscar)
+                ) {
+                    html += `
+                        <div class="card-producto">
+                            <img src="${productos[i].imagen}" alt="${productos[i].nombre}">
+                            <h3>${productos[i].nombre}</h3>
+                            <p><strong>Cat:</strong> ${productos[i].categoria}</p>
+                            <p class="precio">$${productos[i].precio}</p>
+                            <p><small>Stock: ${productos[i].stock}</small></p><br>
+                            <input type="button" onclick="agregarAlCarrito(${i})" value="Agregar al carrito">
+                        </div>
+                    `;
+                }
+            }
+
+            document.getElementById("mostrar_productos").innerHTML = html;
+        }
+
+        function limpiar() {
+            document.getElementById("buscador").value = "";
+            mostrar();
+        }
+
+        function peliculas() {
+            window.location.href = "ejerciciopeliculas.html";
+        }
+
+        /* LÓGICA DEL CARRITO */
+        function agregarAlCarrito(index) {
+            let prod = productos[index];
+            
+            // Revisa si ya existe en el carrito
+            let existe = carrito.find(item => item.nombre === prod.nombre);
+
+            if (existe) {
+                existe.cantidad++;
+            } else {
+                carrito.push({
+                    nombre: prod.nombre,
+                    precio: prod.precio,
+                    cantidad: 1
+                });
+            }
+
+            actualizarCarritoUI();
+        }
+
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            actualizarCarritoUI();
+        }
+
+        function actualizarCarritoUI() {
+            let contenedor = document.getElementById("lista_carrito");
+            let totalDiv = document.getElementById("total_precio");
+            
+            if (carrito.length === 0) {
+                contenedor.innerHTML = "<p><small>El carrito está vacío.</small></p>";
+                totalDiv.innerText = "Total: $0";
+                return;
+            }
+
+            let html = "";
+            let total = 0;
+
+            for (let i = 0; i < carrito.length; i++) {
+                let subtotal = carrito[i].precio * carrito[i].cantidad;
+                total += subtotal;
+
+                html += `
+                    <div class="item-carrito">
+                        <div>
+                            <p>${carrito[i].nombre}</p>
+                            <span>$${carrito[i].precio} x ${carrito[i].cantidad} = $${subtotal}</span>
+                        </div>
+                        <button class="btn-eliminar" onclick="eliminarDelCarrito(${i})">X</button>
+                    </div>
+                `;
+            }
+
+            contenedor.innerHTML = html;
+            totalDiv.innerText = `Total: $${total}`;
+        }
+
+        function enviarWhatsApp() {
+            if (carrito.length === 0) {
+                alert("El carrito está vacío.");
+                return;
+            }
+
+            let nombre = document.getElementById("clienteNombre").value.trim();
+            let direccion = document.getElementById("clienteDireccion").value.trim();
+
+            if (nombre === "" || direccion === "") {
+                alert("Por favor ingresa tu nombre y dirección.");
+                return;
+            }
+
+            // Armar texto del carrito
+            let detalleProductos = "";
+            let totalFinal = 0;
+
+            for (let i = 0; i < carrito.length; i++) {
+                let subtotal = carrito[i].precio * carrito[i].cantidad;
+                totalFinal += subtotal;
+                detalleProductos += `• ${carrito[i].nombre} (x${carrito[i].cantidad}) - $${subtotal}%0A`;
+            }
+
+            let mensaje = `*¡Hola! Quiero hacer el siguiente pedido:*%0A%0A` +
+                          `*Productos:*%0A${detalleProductos}%0A` +
+                          `*Total a pagar:* $${totalFinal}%0A%0A` +
+                          `*Datos de envío:*%0A` +
+                          `- *Nombre:* ${nombre}%0A` +
+                          `- *Dirección:* ${direccion}`;
+
+            let url = `https://wa.me/${telefonoWhatsApp}?text=${mensaje}`;
+            window.open(url, '_blank');
+        }
+
+        mostrar();
+    </script>
+</body>
+</html>

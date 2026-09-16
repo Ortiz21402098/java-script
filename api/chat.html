@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPET N° 57 Comodoro Rivadavia | Córdoba</title>
+    <style>
+        /* Reset y bases */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Encabezado / Navegación */
+        header {
+            background-color: #1a365d;
+            color: #ffffff;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        /* Hero / Portada */
+        .hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(15, 23, 42, 0.85)), 
+                        url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            color: #ffffff;
+            text-align: center;
+            padding: 5rem 1rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            color: #e2e8f0;
+        }
+
+        .btn-hero {
+            background-color: #0284c7;
+            color: white;
+            padding: 0.8rem 1.8rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .btn-hero:hover {
+            background-color: #0369a1;
+        }
+
+        /* Secciones Principales */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #1a365d;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #0284c7;
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Grilla de Especialidades */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid #0284c7;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            color: #0f172a;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Sección Institucional */
+        .nosotros {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+        }
+
+        /* Contacto y Ubicación */
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-contacto {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-contacto p {
+            margin-bottom: 1rem;
+        }
+
+        /* COMPONENTE CHAT AUTÓNOMO */
+        .chat-box {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e2e8f0;
+        }
+
+        .chat-header {
+            background-color: #1a365d;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-header-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #0284c7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .chat-header-info h4 {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .chat-header-info p {
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            margin: 0;
+        }
+
+        .chat-body {
+            background-color: #f1f5f9;
+            padding: 1rem;
+            height: 320px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .msg {
+            max-width: 85%;
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .msg-recibido {
+            background-color: #ffffff;
+            align-self: flex-start;
+            border-top-left-radius: 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            color: #1e293b;
+        }
+
+        .msg-enviado {
+            background-color: #0284c7;
+            color: white;
+            align-self: flex-end;
+            border-top-right-radius: 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .opciones-chat {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .btn-opcion {
+            background-color: #ffffff;
+            border: 1px solid #0284c7;
+            color: #0284c7;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .btn-opcion:hover {
+            background-color: #0284c7;
+            color: white;
+        }
+
+        .chat-footer {
+            padding: 0.8rem;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 0.6rem 0.9rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .chat-footer button {
+            background-color: #0284c7;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .chat-footer button:hover {
+            background-color: #0369a1;
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>IPET N° 57 <span>Comodoro Rivadavia</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#institucional">Institucional</a></li>
+                    <li><a href="#especialidades">Especialidades</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección Hero / Portada -->
+    <section class="hero" id="inicio">
+        <h2>Educación Técnica de Excelencia</h2>
+        <p>Formando los profesionales y técnicos del futuro en la ciudad de Córdoba con compromiso, innovación y trabajo práctico.</p>
+        <a href="#contacto" class="btn-hero">Consultar Inscripciones</a>
+    </section>
+
+    <!-- Contenido Principal -->
+    <div class="container">
+
+        <!-- Sobre la Escuela -->
+        <section class="nosotros" id="institucional">
+            <h2 class="section-title">Nuestra Institución</h2>
+            <p>El <strong>IPET N° 57 "Comodoro Rivadavia"</strong> es una escuela pública de educación técnica de la ciudad de Córdoba. Nos dedicamos a brindar una formación integral que combina el saber académico con la práctica en talleres y laboratorios equipados, preparando a nuestros estudiantes tanto para el mundo laboral como para la continuidad de estudios superiores.</p>
+        </section>
+
+        <!-- Especialidades Técnicas -->
+        <section id="especialidades" style="margin-bottom: 3rem;">
+            <h2 class="section-title">Oferta Académica</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Ciclo Básico</h3>
+                    <p>Formación general e iniciación técnica en talleres mecánicos, de dibujo técnico y electricidad para el primer ciclo del nivel secundario.</p>
+                </div>
+                <div class="card">
+                    <h3>Ciclo Orientado</h3>
+                    <p>Formación técnica específica donde los alumnos desarrollan proyectos tecnológicos reales, prácticas profesionalizantes y pasantías.</p>
+                </div>
+                <div class="card">
+                    <h3>Talleres y Laboratorios</h3>
+                    <p>Espacios equipados para el aprendizaje práctico en electrónica, mecánica, informática y procesos industriales.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Contacto con Chat Autónomo -->
+        <section id="contacto">
+            <h2 class="section-title">Asistente de Consultas</h2>
+            <div class="contacto-grid">
+                
+                <!-- Chat Interactivo Autónomo -->
+                <div class="chat-box">
+                    <div class="chat-header">
+                        <div class="chat-header-avatar">57</div>
+                        <div class="chat-header-info">
+                            <h4>Asistente Virtual IPET N° 57</h4>
+                            <p>Respuesta inmediata</p>
+                        </div>
+                    </div>
+
+                    <div class="chat-body" id="chatBody">
+                        <div class="msg msg-recibido">
+                            ¡Hola! 👋 Bienvenido al centro de consultas del IPET N° 57. Podés seleccionar una opción o escribir tu duda:
+                            <div class="opciones-chat">
+                                <button class="btn-opcion" onclick="responderOpcion('Inscripciones')">Inscripciones</button>
+                                <button class="btn-opcion" onclick="responderOpcion('Requisitos')">Requisitos</button>
+                                <button class="btn-opcion" onclick="responderOpcion('Horarios')">Horarios</button>
+                                <button class="btn-opcion" onclick="responderOpcion('Ubicación')">Ubicación</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-footer">
+                        <input type="text" id="chatInput" placeholder="Escribí tu consulta..." onkeypress="handleKeyPress(event)">
+                        <button onclick="procesarMensaje()">Enviar</button>
+                    </div>
+                </div>
+
+                <!-- Info Institucional -->
+                <div class="info-contacto">
+                    <h3>Datos Generales</h3>
+                    <br>
+                    <p><strong>Ubicación:</strong> Ciudad de Córdoba, Córdoba, Argentina</p>
+                    <p><strong>Teléfono Directo:</strong> +54 9 3564 58-1110</p>
+                    <p><strong>Horarios de Atención:</strong> Lunes a Viernes de 08:00 a 18:00 hs</p>
+                    <p><strong>Email:</strong> contacto@ipet57.edu.ar</p>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 IPET N° 57 Comodoro Rivadavia - Ciudad de Córdoba. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Lógica de Respuestas en Pantalla -->
+    <script>
+        const respuestas = {
+            "Inscripciones": "Las inscripciones para el ciclo lectivo se realizan de forma presencial en la secretaría del establecimiento. Las fechas de preinscripción suelen ser en los meses de noviembre y diciembre.",
+            "Requisitos": "Los requisitos básicos son: Fotocopia de DNI del alumno y tutor, certificado de finalización de estudios anteriores, partida de nacimiento y Ficha Médica (CUS) actualizada.",
+            "Horarios": "El horario de clases de materias teóricas y talleres se desarrolla de Lunes a Viernes entre las 08:00 y las 18:00 hs, según el turno y división asignados.",
+            "Ubicación": "Nos encontramos ubicados en la ciudad de Córdoba, provincia de Córdoba, Argentina."
+        };
+
+        function agregarMensaje(texto, esUsuario) {
+            const chatBody = document.getElementById('chatBody');
+            const nuevoMsg = document.createElement('div');
+            nuevoMsg.classList.add('msg');
+            nuevoMsg.classList.add(esUsuario ? 'msg-enviado' : 'msg-recibido');
+            nuevoMsg.textContent = texto;
+            chatBody.appendChild(nuevoMsg);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function responderOpcion(clave) {
+            agregarMensaje(clave, true);
+            setTimeout(() => {
+                if (respuestas[clave]) {
+                    agregarMensaje(respuestas[clave], false);
+                }
+            }, 400);
+        }
+
+        function procesarMensaje() {
+            const input = document.getElementById('chatInput');
+            const texto = input.value.trim();
+
+            if (texto === "") return;
+
+            agregarMensaje(texto, true);
+            input.value = "";
+
+            setTimeout(() => {
+                const textoMinuscula = texto.toLowerCase();
+
+                if (textoMinuscula.includes("inscrip") || textoMinuscula.includes("anotar") || textoMinuscula.includes("vacante")) {
+                    agregarMensaje(respuestas["Inscripciones"], false);
+                } else if (textoMinuscula.includes("requisit") || textoMinuscula.includes("docu") || textoMinuscula.includes("papel")) {
+                    agregarMensaje(respuestas["Requisitos"], false);
+                } else if (textoMinuscula.includes("hora") || textoMinuscula.includes("turno")) {
+                    agregarMensaje(respuestas["Horarios"], false);
+                } else if (textoMinuscula.includes("donde") || textoMinuscula.includes("ubica") || textoMinuscula.includes("direccion")) {
+                    agregarMensaje(respuestas["Ubicación"], false);
+                } else if (textoMinuscula.includes("hola") || textoMinuscula.includes("buenas")) {
+                    agregarMensaje("¡Hola! ¿En qué puedo ayudarte? Podés consultar sobre inscripciones, requisitos, horarios o ubicación.", false);
+                } else {
+                    agregarMensaje("Gracias por tu consulta. Para coordinar una atención personalizada podés llamar o comunicarte directamente con Dirección al 3564581110.", false);
+                }
+            }, 500);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                procesarMensaje();
+            }
+        }
+    </script>
+
+</body>
+</html>
